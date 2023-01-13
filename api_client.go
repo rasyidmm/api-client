@@ -60,7 +60,7 @@ func (a *ApiClient) Post(response interface{}) (interface{}, error) {
 	fmt.Println("Res Header : ", data.RawResponse.Header)
 	fmt.Println("Res Body : ", string(data.Body()))
 
-	if data.StatusCode() != 200 {
+	if data.RawResponse.StatusCode != 200 {
 		logs := a.ApiLog("Post", a.Endpoint, data)
 		return logs, status.Error(codes.Internal, data.Status())
 	}
@@ -89,7 +89,7 @@ func (a *ApiClient) Get(response interface{}) (interface{}, error) {
 	fmt.Println("Res Header : ", data.RawResponse.Header)
 	fmt.Println("Res Body : ", string(data.Body()))
 
-	if data.StatusCode() != 200 {
+	if data.RawResponse.StatusCode != 200 {
 		logs := a.ApiLog("Get", a.Endpoint, data)
 		return logs, status.Error(codes.Internal, data.Status())
 	}
